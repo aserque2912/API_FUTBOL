@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "980747666481",
+    "project_id": "footbal-api-bbdb7",
+    "storage_bucket": "footbal-api-bbdb7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:980747666481:android:a57f3745b326d3c45f0110",
+        "android_client_info": {
+          "package_name": "com.adrianserranoquero.api_futbol"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "980747666481-060g5ueaqq0uc4v7ehagk8c0b9950pkd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.adrianserranoquero.api_futbol",
+            "certificate_hash": "38f6f4ef8fe2bc86d1f19d7a142d7e33c2410d0a"
+          }
+        },
+        {
+          "client_id": "980747666481-gcjpeqnqi554o3jk8do0i7vqma41hgo8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDSIcwqLm-Y8wqDIhy3srwPMeki16PekE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "980747666481-gcjpeqnqi554o3jk8do0i7vqma41hgo8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

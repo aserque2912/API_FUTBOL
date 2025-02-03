@@ -1,70 +1,75 @@
-package com.adrianserranoquero.api_futbol.ui.theme
-import com.adrianserranoquero.api_futbol.network.Team
-import com.adrianserranoquero.api_futbol.viewmodel.FootballViewModel
+package com.adrianserranoquero.api_futbol.ui
+
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.*
+import androidx.compose.material.Card
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import coil.compose.AsyncImage
+import androidx.compose.ui.unit.sp
+import coil.compose.rememberAsyncImagePainter
+import com.adrianserranoquero.api_futbol.network.Team
+
 @Composable
-fun TeamsScreen(navController: NavController, viewModel: FootballViewModel) {
-    val teams = viewModel.teams.collectAsState().value
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("Equipos de Fútbol") }
-            )
-        }
-    ) { paddingValues ->
-        if (teams.isEmpty()) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues),
-                contentAlignment = Alignment.Center
-            ) {
-                Text("No hay equipos disponibles.")
-            }
-        } else {
-            LazyColumn(
-                contentPadding = PaddingValues(16.dp),
-                modifier = Modifier.padding(paddingValues)
-            ) {
-                items(teams) { team ->
-                    TeamItem(team, navController)
-                }
-            }
+fun TeamScreen(teams: List<Team>, onTeamClick: (Team) -> Unit) {
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(8.dp)
+    ) {
+        items(teams) { team ->
+            TeamCard(team = team, onTeamClick = onTeamClick)
         }
     }
 }
+
 @Composable
-fun TeamItem(team: Team, navController: NavController) {
+fun TeamCard(team: Team, onTeamClick: (Team) -> Unit) {
     Card(
+        elevation = 4.dp,
+        shape = RoundedCornerShape(8.dp),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp)
-            .clickable { navController.navigate("detail/${team.id}") },
-        elevation = 4.dp
+            .padding(vertical = 8.dp)
+            .clickable { onTeamClick(team) }
     ) {
         Row(
-            modifier = Modifier.padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Column {
-                Text(text = team.name, style = MaterialTheme.typography.h6)
-            }
-            AsyncImage(
-                model = team.logo,
-                contentDescription = "Logo del equipo",
-                modifier = Modifier.size(50.dp)
+            Image(
+                painter = rememberAsyncImagePainter(model = team.logo),
+                contentDescription = "Team Logo",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(64.dp)
+                    .padding(end = 16.dp)
             )
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = team.name,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    text = "Country: ${team.country}",
+                    fontSize = 14.sp
+                )
+                Text(
+                    text = "Code: ${team.code}",
+                    fontSize = 14.sp
+                )
+            }
         }
     }
 }

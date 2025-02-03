@@ -1,4 +1,4 @@
-package com.adrianserranoquero.api_futbol
+package com.adrianserranoquero
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

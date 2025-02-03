@@ -1,4 +1,4 @@
-package com.adrianserranoquero.api_futbol
+package com.adrianserranoquero
 
 import org.junit.Test
 
